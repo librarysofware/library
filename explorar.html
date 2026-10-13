@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorar libros - Library</title>
+
+    <style>
+
+        /* página */
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #242330;
+            color: white;
+        }
+
+        .pagina {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* menú */
+
+        .menu {
+            width: 200px;
+            min-height: 100vh;
+            background-color: #20202d;
+            padding: 25px 18px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .acciones {
+            margin-bottom: 30px;
+        }
+
+        .acciones a {
+            display: block;
+            color: #bdbdcc;
+            text-decoration: none;
+            padding: 10px 5px;
+            font-size: 14px;
+        }
+
+        .acciones a:hover {
+            color: white;
+        }
+
+        .generos h3 {
+            color: white;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .generos a {
+            display: block;
+            color: #bdbdcc;
+            text-decoration: none;
+            padding: 7px 5px;
+            font-size: 14px;
+        }
+
+        .generos a:hover {
+            color: white;
+        }
+
+
+        /* contenido */
+
+        .contenido {
+            flex: 1;
+            padding: 25px 30px;
+            box-sizing: border-box;
+        }
+
+
+        /* parte superior */
+
+        .superior {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .buscar input {
+            width: 500px;
+            max-width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background-color: #30303f;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .buscar input::placeholder {
+            color: #aaa9b8;
+        }
+
+
+        /* perfil */
+
+        .perfil {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perfil img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .flecha {
+            color: #4da6ff;
+            font-size: 20px;
+        }
+
+
+        /* título */
+
+        .titulo h1 {
+            font-size: 32px;
+            margin: 0;
+        }
+
+        .titulo p {
+            color: #aaa9b8;
+            margin-top: 8px;
+        }
+
+
+        /* libros */
+
+        .seccion {
+            margin-top: 35px;
+        }
+
+        .seccion h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .libros {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .libro {
+            min-width: 0;
+        }
+
+        .libro img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 7px;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .libro img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px #00000066;
+        }
+
+        .libro h3 {
+            font-size: 14px;
+            margin: 8px 0 4px;
+        }
+
+        .libro p {
+            color: #aaa9b8;
+            font-size: 12px;
+            margin: 0;
+        }
+
+
+        /* responsive */
+
+        @media (max-width: 1100px) {
+
+            .libros {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            .pagina {
+                display: block;
+            }
+
+            .menu {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .superior {
+                display: block;
+            }
+
+            .perfil {
+                margin-top: 15px;
+            }
+
+            .libros {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="pagina">
+
+
+        <!-- menú -->
+
+        <aside class="menu">
+
+            <div class="logo">
+                LIBRARY
+            </div>
+
+
+            <div class="acciones">
+
+                <a href="pagina.html">
+                    🏠 Inicio
+                </a>
+
+                <a href="explorar.html" style="color: white; font-weight: bold;">
+                    📚 Explorar libros
+                </a>
+
+                <a href="prestamos.html">
+                    📖 Mis préstamos
+                </a>
+
+                <a href="reservar.html">
+                    🔖 Reservar libro
+                </a>
+
+                <a href="alertas.html">
+                    🔔 Alertas
+                </a>
+
+                <a href="qr.html">
+                    ▣ Mi código QR
+                </a>
+
+                <a href="perfil.html">
+                    👤 Mi perfil
+                </a>
+
+            </div>
+
+
+            <div class="generos">
+
+                <h3>Géneros</h3>
+
+                <a href="ficcion.html">Ficción</a>
+                <a href="novela.html">Novela</a>
+                <a href="cienciaficcion.html">Ciencia ficción</a>
+                <a href="fantasia.html">Fantasía</a>
+                <a href="noficcion.html">No ficción</a>
+                <a href="misterio.html">Misterio</a>
+                <a href="thriller.html">Thriller</a>
+                <a href="juvenil.html">Juvenil</a>
+                <a href="romance.html">Romance</a>
+                <a href="terror.html">Terror</a>
+                <a href="aventura.html">Aventura</a>
+                <a href="historia.html">Historia</a>
+                <a href="todos.html">Todos los libros</a>
+
+                <a href="https://www.google.com/maps" target="_blank">
+                    📍 Maps
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- contenido -->
+
+        <main class="contenido">
+
+
+            <!-- buscador y perfil -->
+
+            <div class="superior">
+
+                <div class="buscar">
+
+                    <input
+                        type="text"
+                        id="buscar"
+                        placeholder="🔍 Buscar un libro..."
+                    >
+
+                </div>
+
+
+                <div class="perfil">
+
+                    <img src="https://i.pravatar.cc/100?img=47">
+
+                    <span>Jessica</span>
+
+                    <span class="flecha">
+                        ⌄
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- título -->
+
+            <div class="titulo">
+
+                <h1>Explorar libros</h1>
+
+                <p>
+                    Descubre libros de diferentes temas, autores y géneros.
+                </p>
+
+            </div>
+
+
+            <!-- todos los libros -->
+
+            <section class="seccion">
+
+                <h2>📚 Descubre nuevos libros</h2>
+
+                <div class="libros">
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg">
+
+                        <h3>Sapiens</h3>
+
+                        <p>Yuval Noah Harari</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg">
+
+                        <h3>El Hobbit</h3>
+
+                        <p>J.R.R. Tolkien</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780141439570-L.jpg">
+
+                        <h3>Orgullo y prejuicio</h3>
+
+                        <p>Jane Austen</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780553380163-L.jpg">
+
+                        <h3>Una breve historia del tiempo</h3>
+
+                        <p>Stephen Hawking</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780374530716-L.jpg">
+
+                        <h3>El mundo de Sofía</h3>
+
+                        <p>Jostein Gaarder</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780439023481-L.jpg">
+
+                        <h3>Los juegos del hambre</h3>
+
+                        <p>Suzanne Collins</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780132350884-L.jpg">
+
+                        <h3>Clean Code</h3>
+
+                        <p>Robert C. Martin</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9781501143519-L.jpg">
+
+                        <h3>El visitante</h3>
+
+                        <p>Stephen King</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780812969375-L.jpg">
+
+                        <h3>El hombre que calculaba</h3>
+
+                        <p>Malba Tahan</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780345539434-L.jpg">
+
+                        <h3>Cosmos</h3>
+
+                        <p>Carl Sagan</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780143039952-L.jpg">
+
+                        <h3>Armas, gérmenes y acero</h3>
+
+                        <p>Jared Diamond</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9781501110368-L.jpg">
+
+                        <h3>It Ends with Us</h3>
+
+                        <p>Colleen Hoover</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780062457738-L.jpg">
+
+                        <h3>Perdida</h3>
+
+                        <p>Gillian Flynn</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780439554930-L.jpg">
+
+                        <h3>Harry Potter</h3>
+
+                        <p>J.K. Rowling</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780465024935-L.jpg">
+
+                        <h3>El universo elegante</h3>
+
+                        <p>Brian Greene</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780140449273-L.jpg">
+
+                        <h3>El banquete</h3>
+
+                        <p>Platón</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9781492051367-L.jpg">
+
+                        <h3>Python Crash Course</h3>
+
+                        <p>Eric Matthes</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780060934347-L.jpg">
+
+                        <h3>Cien años de soledad</h3>
+
+                        <p>Gabriel García Márquez</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780307743657-L.jpg">
+
+                        <h3>El resplandor</h3>
+
+                        <p>Stephen King</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780141439471-L.jpg">
+
+                        <h3>Planilandia</h3>
+
+                        <p>Edwin A. Abbott</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780062316097-L.jpg">
+
+                        <h3>Homo Deus</h3>
+
+                        <p>Yuval Noah Harari</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9781594746031-L.jpg">
+
+                        <h3>Aristóteles y Dante</h3>
+
+                        <p>Benjamin Alire Sáenz</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780316388149-L.jpg">
+
+                        <h3>La cuchara menguante</h3>
+
+                        <p>Sam Kean</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780143035733-L.jpg">
+
+                        <h3>1491</h3>
+
+                        <p>Charles C. Mann</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780142437230-L.jpg">
+
+                        <h3>Jane Eyre</h3>
+
+                        <p>Charlotte Brontë</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9781250808822-L.jpg">
+
+                        <h3>The Love Hypothesis</h3>
+
+                        <p>Ali Hazelwood</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9781593279288-L.jpg">
+
+                        <h3>Eloquent JavaScript</h3>
+
+                        <p>Marijn Haverbeke</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780140449488-L.jpg">
+
+                        <h3>Ética a Nicómaco</h3>
+
+                        <p>Aristóteles</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780064400558-L.jpg">
+
+                        <h3>Coraline</h3>
+
+                        <p>Neil Gaiman</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780385739771-L.jpg">
+
+                        <h3>El corredor del laberinto</h3>
+
+                        <p>James Dashner</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780141321008-L.jpg">
+
+                        <h3>La llamada de la selva</h3>
+
+                        <p>Jack London</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780307389958-L.jpg">
+
+                        <h3>1776</h3>
+
+                        <p>David McCullough</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780141439600-L.jpg">
+
+                        <h3>Hamlet</h3>
+
+                        <p>William Shakespeare</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780135957059-L.jpg">
+
+                        <h3>The Pragmatic Programmer</h3>
+
+                        <p>David Thomas</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780465017059-L.jpg">
+
+                        <h3>Seis piezas fáciles</h3>
+
+                        <p>Richard Feynman</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780142437179-L.jpg">
+
+                        <h3>Crimen y castigo</h3>
+
+                        <p>Fiódor Dostoyevski</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780061122415-L.jpg">
+
+                        <h3>Las ventajas de ser invisible</h3>
+
+                        <p>Stephen Chbosky</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9781501171345-L.jpg">
+
+                        <h3>Red, White & Royal Blue</h3>
+
+                        <p>Casey McQuiston</p>
+
+                    </div>
+
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780064404990-L.jpg">
+
+                        <h3>La isla del tesoro</h3>
+
+                        <p>Robert Louis Stevenson</p>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- buscador -->
+
+    <script>
+
+        const buscador = document.getElementById("buscar");
+
+        const libros = document.querySelectorAll(".libro");
+
+
+        buscador.addEventListener("input", function () {
+
+            const texto = buscador.value.toLowerCase();
+
+
+            libros.forEach(function (libro) {
+
+                const nombre = libro.innerText.toLowerCase();
+
+
+                if (nombre.includes(texto)) {
+
+                    libro.style.display = "block";
+
+                } else {
+
+                    libro.style.display = "none";
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

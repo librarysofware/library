@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Terror - Library</title>
+
+    <style>
+
+        /* página */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #242330;
+            color: white;
+        }
+
+        .pagina {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* menú */
+        .menu {
+            width: 200px;
+            min-height: 100vh;
+            background-color: #20202d;
+            padding: 25px 18px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .acciones {
+            margin-bottom: 30px;
+        }
+
+        .acciones a {
+            display: block;
+            color: #bdbdcc;
+            text-decoration: none;
+            padding: 10px 5px;
+            font-size: 14px;
+        }
+
+        .acciones a:hover {
+            color: white;
+        }
+
+        .generos h3 {
+            color: white;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .generos a {
+            display: block;
+            color: #bdbdcc;
+            text-decoration: none;
+            padding: 7px 5px;
+            font-size: 14px;
+        }
+
+        .generos a:hover {
+            color: white;
+        }
+
+        .generos a.activo {
+            color: white;
+            font-weight: bold;
+        }
+
+        /* contenido */
+        .contenido {
+            flex: 1;
+            padding: 25px 30px;
+            box-sizing: border-box;
+        }
+
+        .superior {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        /* buscador */
+        .buscar {
+            margin: 0;
+        }
+
+        .buscar input {
+            width: 500px;
+            max-width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background-color: #30303f;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .buscar input::placeholder {
+            color: #aaa9b8;
+        }
+
+        /* perfil */
+        .perfil {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perfil img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .perfil span {
+            color: white;
+        }
+
+        .flecha {
+            color: #4da6ff !important;
+            font-size: 20px;
+        }
+
+        /* título */
+        .titulo h1 {
+            font-size: 32px;
+            margin: 0;
+        }
+
+        .titulo p {
+            color: #aaa9b8;
+            margin-top: 8px;
+        }
+
+        /* libros */
+        .seccion {
+            margin-top: 30px;
+        }
+
+        .seccion h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .libros {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .libro {
+            min-width: 0;
+        }
+
+        .libro img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 7px;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .libro img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px #00000066;
+        }
+
+        .libro h3 {
+            font-size: 14px;
+            margin: 8px 0 4px;
+        }
+
+        .libro p {
+            color: #aaa9b8;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        /* adaptable */
+        @media (max-width: 1100px) {
+
+            .libros {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            .pagina {
+                display: block;
+            }
+
+            .menu {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .superior {
+                display: block;
+            }
+
+            .perfil {
+                margin-top: 15px;
+            }
+
+            .libros {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="pagina">
+
+        <!-- menú -->
+        <aside class="menu">
+
+            <div class="logo">
+                LIBRARY
+            </div>
+
+            <div class="acciones">
+
+                <a href="pagina.html">🏠 Inicio</a>
+                <a href="explorar.html">📚 Explorar libros</a>
+                <a href="prestamos.html">📖 Mis préstamos</a>
+                <a href="reservar.html">🔖 Reservar libro</a>
+                <a href="alertas.html">🔔 Alertas</a>
+                <a href="qr.html">▣ Mi código QR</a>
+                <a href="perfil.html">👤 Mi perfil</a>
+
+            </div>
+
+            <div class="generos">
+
+                <h3>Géneros</h3>
+
+                <a href="ficcion.html">Ficción</a>
+                <a href="novela.html">Novela</a>
+                <a href="cienciaficcion.html">Ciencia ficción</a>
+                <a href="fantasia.html">Fantasía</a>
+                <a href="noficcion.html">No ficción</a>
+                <a href="misterio.html">Misterio</a>
+                <a href="thriller.html">Thriller</a>
+                <a href="juvenil.html">Juvenil</a>
+                <a href="romance.html">Romance</a>
+                <a href="terror.html" class="activo">Terror</a>
+                <a href="aventura.html">Aventura</a>
+                <a href="historia.html">Historia</a>
+                <a href="todos.html">Todos los libros</a>
+
+                <a href="https://www.google.com/maps" target="_blank">
+                    📍 Maps
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- contenido -->
+        <main class="contenido">
+
+            <!-- buscador y perfil -->
+            <div class="superior">
+
+                <div class="buscar">
+
+                    <input
+                        type="text"
+                        id="buscar"
+                        placeholder="🔍 Buscar un libro de terror..."
+                    >
+
+                </div>
+
+                <div class="perfil">
+
+                    <img src="https://i.pravatar.cc/100?img=47">
+
+                    <span>Jessica</span>
+
+                    <span class="flecha">⌄</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- título -->
+            <div class="titulo">
+
+                <h1>Terror</h1>
+
+                <p>
+                    Adéntrate en historias oscuras, misteriosas y llenas de suspenso que te mantendrán en tensión.
+                </p>
+
+            </div>
+
+
+            <!-- más populares -->
+            <div class="seccion">
+
+                <h2>Más populares</h2>
+
+                <div class="libros">
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9781501143519-L.jpg">
+                        <h3>El visitante</h3>
+                        <p>Stephen King</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780307743657-L.jpg">
+                        <h3>El resplandor</h3>
+                        <p>Stephen King</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9781501167715-L.jpg">
+                        <h3>It</h3>
+                        <p>Stephen King</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg">
+                        <h3>Drácula</h3>
+                        <p>Bram Stoker</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780142437421-L.jpg">
+                        <h3>Frankenstein</h3>
+                        <p>Mary Shelley</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780064400558-L.jpg">
+                        <h3>Coraline</h3>
+                        <p>Neil Gaiman</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780307387899-L.jpg">
+                        <h3>El misterio de Salem's Lot</h3>
+                        <p>Stephen King</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- recomendados -->
+            <div class="seccion">
+
+                <h2>Recomendados</h2>
+
+                <div class="libros">
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9781501111679-L.jpg">
+                        <h3>Cementerio de animales</h3>
+                        <p>Stephen King</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780385121675-L.jpg">
+                        <h3>El exorcista</h3>
+                        <p>William Peter Blatty</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg">
+                        <h3>La casa de hojas</h3>
+                        <p>Mark Z. Danielewski</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780062094347-L.jpg">
+                        <h3>La maldición de Hill House</h3>
+                        <p>Shirley Jackson</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780143035009-L.jpg">
+                        <h3>El corazón de las tinieblas</h3>
+                        <p>Joseph Conrad</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780060850524-L.jpg">
+                        <h3>El hombre de negro</h3>
+                        <p>Stephen King</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780064407682-L.jpg">
+                        <h3>El ladrón de cuerpos</h3>
+                        <p>Anne Rice</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- clásicos de terror -->
+            <div class="seccion">
+
+                <h2>Clásicos de terror</h2>
+
+                <div class="libros">
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg">
+                        <h3>Drácula</h3>
+                        <p>Bram Stoker</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780142437421-L.jpg">
+                        <h3>Frankenstein</h3>
+                        <p>Mary Shelley</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780060850524-L.jpg">
+                        <h3>El hombre de negro</h3>
+                        <p>Stephen King</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780307743657-L.jpg">
+                        <h3>El resplandor</h3>
+                        <p>Stephen King</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9781501167715-L.jpg">
+                        <h3>It</h3>
+                        <p>Stephen King</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780064400558-L.jpg">
+                        <h3>Coraline</h3>
+                        <p>Neil Gaiman</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780062094347-L.jpg">
+                        <h3>La maldición de Hill House</h3>
+                        <p>Shirley Jackson</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- buscador -->
+    <script>
+
+        const buscador = document.getElementById("buscar");
+
+        const libros = document.querySelectorAll(".libro");
+
+        buscador.addEventListener("input", function () {
+
+            const texto = buscador.value.toLowerCase();
+
+            libros.forEach(function (libro) {
+
+                const nombre = libro.innerText.toLowerCase();
+
+                if (nombre.includes(texto)) {
+                    libro.style.display = "block";
+                } else {
+                    libro.style.display = "none";
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

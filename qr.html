@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi código QR - LIBRARY</title>
+
+    <style>
+        /* página */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #242330;
+            color: white;
+        }
+
+        .pagina {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* menú lateral */
+        .menu {
+            width: 220px;
+            min-width: 220px;
+            background: #20202d;
+            padding: 25px 18px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #c8b6ff;
+            margin-bottom: 30px;
+        }
+
+        .menu a {
+            display: block;
+            color: #c9c8d6;
+            text-decoration: none;
+            padding: 11px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .menu a:hover,
+        .menu a.activo {
+            background: #39364f;
+            color: white;
+        }
+
+        .generos {
+            margin-top: 25px;
+        }
+
+        .generos h3 {
+            color: #9997ae;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* contenido principal */
+        .contenido {
+            flex: 1;
+            min-width: 0;
+            padding: 25px 30px;
+        }
+
+        .barra {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .buscador {
+            width: 60%;
+            max-width: 500px;
+            padding: 13px;
+            background: #30303f;
+            border: 1px solid #454456;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .buscador::placeholder {
+            color: #aaa9b8;
+        }
+
+        .perfil {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perfil img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+        }
+
+        .perfil span {
+            color: #c8b6ff;
+            font-size: 13px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .descripcion {
+            color: #aaa9b8;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        /* tarjeta de identificación */
+        .tarjeta {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #2d2c3b;
+            border: 1px solid #39384a;
+            border-radius: 18px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .datos h2 {
+            margin: 5px 0;
+            font-size: 23px;
+        }
+
+        .etiqueta {
+            color: #aaa9b8;
+            font-size: 14px;
+        }
+
+        .dato {
+            padding: 12px 0;
+            border-bottom: 1px solid #454456;
+            line-height: 1.6;
+        }
+
+        .dato strong {
+            display: block;
+            color: #c8b6ff;
+            font-size: 14px;
+        }
+
+        /* código QR */
+        .zona-qr {
+            text-align: center;
+            background: #242330;
+            padding: 25px 15px;
+            border-radius: 15px;
+        }
+
+        .zona-qr h3 {
+            margin-top: 0;
+        }
+
+        .imagen-qr {
+            display: block;
+            width: 240px;
+            height: 240px;
+            max-width: 100%;
+            margin: 15px auto;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .nota {
+            font-size: 12px;
+            color: #aaa9b8;
+            line-height: 1.5;
+            margin-top: 15px;
+        }
+
+        /* botones */
+        .botones {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        button {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .principal {
+            background: #a78bfa;
+            color: #201b35;
+        }
+
+        .secundario {
+            background: #39364f;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .mensaje {
+            color: #b9f6ca;
+            text-align: center;
+            margin-top: 15px;
+            min-height: 20px;
+        }
+
+        /* versión para celular */
+        @media (max-width: 750px) {
+            .pagina {
+                flex-direction: column;
+            }
+
+            .menu {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .acciones {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3px;
+            }
+
+            .generos {
+                display: none;
+            }
+
+            .contenido {
+                padding: 20px 15px;
+            }
+
+            .barra {
+                flex-wrap: wrap;
+            }
+
+            .buscador {
+                width: 100%;
+                max-width: none;
+            }
+
+            .tarjeta {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+
+        /* impresión */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .menu,
+            .barra,
+            .botones,
+            .descripcion {
+                display: none;
+            }
+
+            .contenido {
+                padding: 0;
+            }
+
+            .tarjeta {
+                background: white;
+                color: black;
+                border: 1px solid #ccc;
+            }
+
+            .zona-qr {
+                background: white;
+                border: 1px solid #ccc;
+            }
+
+            .dato strong {
+                color: black;
+            }
+
+            .nota,
+            .etiqueta {
+                color: #555;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="pagina">
+
+    <!-- menú lateral -->
+    <aside class="menu">
+
+        <div class="logo">LIBRARY</div>
+
+        <div class="acciones">
+            <a href="pagina.html">🏠 Inicio</a>
+            <a href="explorar.html">📚 Explorar libros</a>
+            <a href="prestamos.html">📖 Mis préstamos</a>
+            <a href="reservar.html">🔖 Reservar libro</a>
+            <a href="alertas.html">🔔 Alertas</a>
+            <a href="qr.html" class="activo">▣ Mi código QR</a>
+            <a href="perfil.html">👤 Mi perfil</a>
+        </div>
+
+        <div class="generos">
+            <h3>GÉNEROS</h3>
+            <a href="ficcion.html">Ficción</a>
+            <a href="novela.html">Novela</a>
+            <a href="cienciaficcion.html">Ciencia ficción</a>
+            <a href="fantasia.html">Fantasía</a>
+            <a href="noficcion.html">No ficción</a>
+            <a href="misterio.html">Misterio</a>
+            <a href="thriller.html">Thriller</a>
+            <a href="juvenil.html">Juvenil</a>
+            <a href="romance.html">Romance</a>
+            <a href="terror.html">Terror</a>
+            <a href="aventura.html">Aventura</a>
+            <a href="historia.html">Historia</a>
+            <a href="todos.html">Todos los libros</a>
+            <a href="https://www.google.com/maps" target="_blank">📍 Maps</a>
+        </div>
+
+    </aside>
+
+    <!-- contenido -->
+    <main class="contenido">
+
+        <div class="barra">
+
+            <input
+                class="buscador"
+                type="text"
+                id="busqueda"
+                placeholder="🔍 Buscar en mi identificación..."
+            >
+
+            <div class="perfil">
+                <img
+                    src="https://i.pravatar.cc/100?img=47"
+                    alt="Foto de Jessica"
+                >
+
+                <div>
+                    <strong>Jessica</strong><br>
+                    <span>Estudiante ⌄</span>
+                </div>
+            </div>
+
+        </div>
+
+        <h1>▣ Mi código QR</h1>
+
+        <p class="descripcion">
+            Esta es tu identificación digital de LIBRARY.
+            Puedes mostrar tu código QR para identificar tu cuenta.
+        </p>
+
+        <section class="tarjeta" id="tarjetaQR">
+
+            <!-- datos del usuario -->
+            <div class="datos">
+
+                <img
+                    class="avatar"
+                    src="https://i.pravatar.cc/100?img=47"
+                    alt="Foto de Jessica"
+                >
+
+                <h2>Jessica</h2>
+                <p class="etiqueta">Miembro de LIBRARY</p>
+
+                <div class="dato">
+                    <strong>Nombre completo</strong>
+                    Jessica
+                </div>
+
+                <div class="dato">
+                    <strong>Código de usuario</strong>
+                    LIB-2026-001
+                </div>
+
+                <div class="dato">
+                    <strong>Tipo de usuario</strong>
+                    Estudiante
+                </div>
+
+                <div class="dato">
+                    <strong>Estado de cuenta</strong>
+                    Activa
+                </div>
+
+            </div>
+
+            <!-- imagen del código QR -->
+            <div class="zona-qr">
+
+                <h3>Mi identificación</h3>
+
+                <img
+                    class="imagen-qr"
+                    id="codigoQR"
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=LIBRARY-USUARIO-LIB-2026-001"
+                    alt="Código QR de usuario LIBRARY"
+                    onerror="mostrarError()"
+                >
+
+                <p class="nota">
+                    Escanea este código para leer el identificador
+                    de ejemplo de tu cuenta de LIBRARY.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- botones -->
+        <div class="botones">
+
+            <button class="principal" onclick="descargarQR()">
+                ⬇ Descargar QR
+            </button>
+
+            <button class="secundario" onclick="window.print()">
+                🖨 Imprimir identificación
+            </button>
+
+            <button
+                class="secundario"
+                onclick="location.href='pagina.html'"
+            >
+                🏠 Volver al inicio
+            </button>
+
+        </div>
+
+        <p class="mensaje" id="mensaje"></p>
+
+    </main>
+
+</div>
+
+<script>
+    // Descargar el código QR
+    async function descargarQR() {
+        const imagen = document.getElementById("codigoQR");
+        const mensaje = document.getElementById("mensaje");
+
+        try {
+            const respuesta = await fetch(imagen.src);
+
+            if (!respuesta.ok) {
+                throw new Error("No se pudo cargar el QR");
+            }
+
+            const archivo = await respuesta.blob();
+            const direccion = URL.createObjectURL(archivo);
+
+            const enlace = document.createElement("a");
+            enlace.href = direccion;
+            enlace.download = "mi-codigo-QR-LIBRARY.png";
+            enlace.click();
+
+            URL.revokeObjectURL(direccion);
+
+            mensaje.textContent = "¡Tu código QR se ha descargado!";
+        } catch (error) {
+            window.open(imagen.src, "_blank");
+            mensaje.textContent =
+                "Abre la imagen del QR y guárdala desde el navegador.";
+        }
+    }
+
+    // Avisar si el QR no carga
+    function mostrarError() {
+        document.getElementById("mensaje").textContent =
+            "No se pudo cargar el QR. Comprueba tu conexión a internet.";
+    }
+
+    // Buscar dentro de la identificación
+    document.getElementById("busqueda").addEventListener("input", function () {
+        const texto = this.value.toLowerCase();
+        const tarjeta = document.getElementById("tarjetaQR");
+
+        if (tarjeta.innerText.toLowerCase().includes(texto)) {
+            tarjeta.style.display = "grid";
+        } else {
+            tarjeta.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>

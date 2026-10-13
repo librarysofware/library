@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alertas - Library</title>
+
+    <style>
+        /* página */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #242330;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .pagina {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* menú */
+
+        .menu {
+            width: 220px;
+            min-height: 100vh;
+            background-color: #20202d;
+            padding: 25px 18px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .acciones {
+            margin-bottom: 30px;
+        }
+
+        .acciones a,
+        .generos a {
+            display: block;
+            color: #bdbdcc;
+            padding: 10px 7px;
+            font-size: 14px;
+            border-radius: 6px;
+        }
+
+        .acciones a:hover,
+        .generos a:hover,
+        .acciones .activo {
+            background-color: #343348;
+            color: white;
+        }
+
+        .generos h3 {
+            color: #85849b;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* contenido */
+
+        .contenido {
+            flex: 1;
+            min-width: 0;
+            padding: 25px 30px;
+        }
+
+        .superior {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            gap: 20px;
+        }
+
+        .buscar {
+            max-width: 550px;
+            width: 100%;
+        }
+
+        .buscar input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #39384a;
+            border-radius: 8px;
+            background-color: #30303f;
+            color: white;
+            outline: none;
+        }
+
+        .buscar input::placeholder {
+            color: #aaa9b8;
+        }
+
+        .perfil {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .perfil img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .flecha {
+            color: #4da6ff;
+            font-size: 20px;
+        }
+
+        /* encabezado */
+
+        .titulo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .titulo h1 {
+            font-size: 30px;
+            margin: 0 0 10px;
+        }
+
+        .titulo p {
+            color: #aaa9b8;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .contador {
+            background-color: #30303f;
+            border: 1px solid #39384a;
+            border-radius: 9px;
+            padding: 13px 18px;
+            text-align: center;
+            min-width: 105px;
+        }
+
+        .contador strong {
+            display: block;
+            font-size: 25px;
+            color: #72b5ff;
+        }
+
+        .contador span {
+            color: #aaa9b8;
+            font-size: 11px;
+        }
+
+        /* resumen */
+
+        .resumen {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .resumen-caja {
+            padding: 18px;
+            border-radius: 10px;
+            background-color: #2d2c3b;
+            border: 1px solid #39384a;
+        }
+
+        .resumen-caja span {
+            font-size: 22px;
+        }
+
+        .resumen-caja p {
+            color: #aaa9b8;
+            font-size: 12px;
+            margin: 12px 0 5px;
+        }
+
+        .resumen-caja strong {
+            font-size: 19px;
+        }
+
+        /* filtros */
+
+        .filtros {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filtro {
+            border: 1px solid #424155;
+            background-color: #2d2c3b;
+            color: #bdbdcc;
+            padding: 10px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .filtro:hover,
+        .filtro.activo {
+            background-color: #286fc7;
+            border-color: #286fc7;
+            color: white;
+        }
+
+        .marcar-todas {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: #72b5ff;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        /* alertas */
+
+        .lista-alertas {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .alerta {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background-color: #2d2c3b;
+            border: 1px solid #39384a;
+            border-radius: 10px;
+        }
+
+        .alerta.no-leida {
+            border-left: 4px solid #4da6ff;
+            background-color: #302f40;
+        }
+
+        .icono-alerta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            font-size: 21px;
+        }
+
+        .azul {
+            background-color: #263e5b;
+        }
+
+        .verde {
+            background-color: #25483b;
+        }
+
+        .amarillo {
+            background-color: #51452b;
+        }
+
+        .morado {
+            background-color: #413052;
+        }
+
+        .texto-alerta {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .texto-alerta h3 {
+            margin: 0 0 8px;
+            font-size: 15px;
+        }
+
+        .texto-alerta p {
+            color: #aaa9b8;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0 0 10px;
+        }
+
+        .fecha-alerta {
+            color: #85849b;
+            font-size: 11px;
+        }
+
+        .acciones-alerta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .estado {
+            color: #72b5ff;
+            font-size: 11px;
+        }
+
+        .boton-leer,
+        .boton-eliminar {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .boton-leer {
+            color: #72b5ff;
+        }
+
+        .boton-eliminar {
+            color: #aaa9b8;
+        }
+
+        .boton-leer:hover,
+        .boton-eliminar:hover {
+            color: white;
+        }
+
+        .vacio {
+            display: none;
+            text-align: center;
+            color: #aaa9b8;
+            padding: 45px 20px;
+            background-color: #2d2c3b;
+            border-radius: 10px;
+        }
+
+        .vacio span {
+            display: block;
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .vacio h3 {
+            color: white;
+        }
+
+        .pie {
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 30px;
+            border-top: 1px solid #39384a;
+            color: #85849b;
+            font-size: 12px;
+        }
+
+        /* adaptable */
+
+        @media (max-width: 900px) {
+            .resumen {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .pagina {
+                display: block;
+            }
+
+            .menu {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .contenido {
+                padding: 20px;
+            }
+
+            .superior {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .perfil {
+                align-self: flex-end;
+            }
+
+            .titulo {
+                align-items: flex-start;
+            }
+
+            .titulo h1 {
+                font-size: 25px;
+            }
+
+            .alerta {
+                flex-wrap: wrap;
+            }
+
+            .acciones-alerta {
+                flex-direction: row;
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .marcar-todas {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="pagina">
+
+    <!-- menú -->
+
+    <aside class="menu">
+
+        <div class="logo">LIBRARY</div>
+
+        <div class="acciones">
+            <a href="pagina.html">🏠 Inicio</a>
+            <a href="explorar.html">📚 Explorar libros</a>
+            <a href="prestamos.html">📖 Mis préstamos</a>
+            <a href="reservar.html">🔖 Reservar libro</a>
+            <a href="alertas.html" class="activo">🔔 Alertas</a>
+            <a href="qr.html">▣ Mi código QR</a>
+            <a href="perfil.html">👤 Mi perfil</a>
+        </div>
+
+        <div class="generos">
+            <h3>GÉNEROS</h3>
+            <a href="ficcion.html">Ficción</a>
+            <a href="novela.html">Novela</a>
+            <a href="cienciaficcion.html">Ciencia ficción</a>
+            <a href="fantasia.html">Fantasía</a>
+            <a href="noficcion.html">No ficción</a>
+            <a href="misterio.html">Misterio</a>
+            <a href="thriller.html">Thriller</a>
+            <a href="juvenil.html">Juvenil</a>
+            <a href="romance.html">Romance</a>
+            <a href="terror.html">Terror</a>
+            <a href="aventura.html">Aventura</a>
+            <a href="historia.html">Historia</a>
+            <a href="todos.html">Todos los libros</a>
+            <a href="https://www.google.com/maps" target="_blank">📍 Maps</a>
+        </div>
+
+    </aside>
+
+    <!-- contenido -->
+
+    <main class="contenido">
+
+        <div class="superior">
+
+            <div class="buscar">
+                <input type="text" id="buscar"
+                    placeholder="🔍 Buscar una alerta...">
+            </div>
+
+            <a href="perfil.html" class="perfil">
+                <img src="https://i.pravatar.cc/100?img=47" alt="Foto de Jessica">
+                <span>Jessica</span>
+                <span class="flecha">⌄</span>
+            </a>
+
+        </div>
+
+        <!-- título -->
+
+        <div class="titulo">
+
+            <div>
+                <h1>Mis alertas 🔔</h1>
+                <p>Consulta tus notificaciones y mantente al día con la biblioteca.</p>
+            </div>
+
+            <div class="contador">
+                <strong id="numeroPendientes">3</strong>
+                <span>Sin leer</span>
+            </div>
+
+        </div>
+
+        <!-- resumen -->
+
+        <section class="resumen">
+
+            <div class="resumen-caja">
+                <span>📚</span>
+                <p>Préstamos activos</p>
+                <strong>2 libros</strong>
+            </div>
+
+            <div class="resumen-caja">
+                <span>📅</span>
+                <p>Próxima devolución</p>
+                <strong>15 oct. 2026</strong>
+            </div>
+
+            <div class="resumen-caja">
+                <span>🔖</span>
+                <p>Reservas</p>
+                <strong>1 solicitud</strong>
+            </div>
+
+        </section>
+
+        <!-- filtros -->
+
+        <div class="filtros">
+
+            <button class="filtro activo" data-filtro="todas">
+                Todas
+            </button>
+
+            <button class="filtro" data-filtro="no-leidas">
+                Sin leer
+            </button>
+
+            <button class="filtro" data-filtro="prestamos">
+                Préstamos
+            </button>
+
+            <button class="filtro" data-filtro="reservas">
+                Reservas
+            </button>
+
+            <button class="marcar-todas" id="marcarTodas">
+                ✓ Marcar todas como leídas
+            </button>
+
+        </div>
+
+        <!-- lista de alertas -->
+
+        <div class="lista-alertas" id="listaAlertas">
+
+            <article class="alerta no-leida" data-tipo="prestamos">
+
+                <div class="icono-alerta amarillo">⏰</div>
+
+                <div class="texto-alerta">
+                    <h3>Recordatorio de devolución</h3>
+                    <p>
+                        Recuerda devolver tu libro antes de la fecha límite.
+                        Revisa tus préstamos para consultar los detalles.
+                    </p>
+                    <span class="fecha-alerta">Hoy · 9:00 a. m.</span>
+                </div>
+
+                <div class="acciones-alerta">
+                    <span class="estado">Sin leer</span>
+                    <button class="boton-leer">Marcar leída</button>
+                    <button class="boton-eliminar">Eliminar</button>
+                </div>
+
+            </article>
+
+            <article class="alerta no-leida" data-tipo="reservas">
+
+                <div class="icono-alerta verde">✓</div>
+
+                <div class="texto-alerta">
+                    <h3>Solicitud de reserva registrada</h3>
+                    <p>
+                        Tu solicitud se ha registrado correctamente.
+                        Consulta la sección de reservas para revisar sus fechas.
+                    </p>
+                    <span class="fecha-alerta">Hoy · 8:30 a. m.</span>
+                </div>
+
+                <div class="acciones-alerta">
+                    <span class="estado">Sin leer</span>
+                    <button class="boton-leer">Marcar leída</button>
+                    <button class="boton-eliminar">Eliminar</button>
+                </div>
+
+            </article>
+
+            <article class="alerta no-leida" data-tipo="prestamos">
+
+                <div class="icono-alerta azul">📖</div>
+
+                <div class="texto-alerta">
+                    <h3>Préstamo activo</h3>
+                    <p>
+                        Recuerda revisar el estado de tus libros prestados
+                        y las fechas de devolución.
+                    </p>
+                    <span class="fecha-alerta">Ayer · 3:15 p. m.</span>
+                </div>
+
+                <div class="acciones-alerta">
+                    <span class="estado">Sin leer</span>
+                    <button class="boton-leer">Marcar leída</button>
+                    <button class="boton-eliminar">Eliminar</button>
+                </div>
+
+            </article>
+
+            <article class="alerta" data-tipo="reservas">
+
+                <div class="icono-alerta morado">🔖</div>
+
+                <div class="texto-alerta">
+                    <h3>Revisa tus reservas</h3>
+                    <p>
+                        Puedes consultar tus solicitudes y las fechas elegidas
+                        desde la página de reservar libros.
+                    </p>
+                    <span class="fecha-alerta">Hace 2 días</span>
+                </div>
+
+                <div class="acciones-alerta">
+                    <span class="estado">Leída</span>
+                    <button class="boton-leer">Marcar leída</button>
+                    <button class="boton-eliminar">Eliminar</button>
+                </div>
+
+            </article>
+
+            <article class="alerta" data-tipo="general">
+
+                <div class="icono-alerta azul">💡</div>
+
+                <div class="texto-alerta">
+                    <h3>Descubre nuevos libros</h3>
+                    <p>
+                        Explora las categorías de la biblioteca y encuentra
+                        nuevas lecturas para estudiar o disfrutar.
+                    </p>
+                    <span class="fecha-alerta">Hace 3 días</span>
+                </div>
+
+                <div class="acciones-alerta">
+                    <span class="estado">Leída</span>
+                    <button class="boton-leer">Marcar leída</button>
+                    <button class="boton-eliminar">Eliminar</button>
+                </div>
+
+            </article>
+
+        </div>
+
+        <div class="vacio" id="vacio">
+            <span>🔔</span>
+            <h3>No hay alertas para mostrar</h3>
+            <p>Cuando tengas nuevas notificaciones, aparecerán aquí.</p>
+        </div>
+
+        <footer class="pie">
+            HomeLibrary · Tu espacio para leer, descubrir y aprender.
+        </footer>
+
+    </main>
+
+</div>
+
+<script>
+    /* alertas */
+
+    const alertas = document.querySelectorAll(".alerta");
+    const filtros = document.querySelectorAll(".filtro");
+    const buscador = document.getElementById("buscar");
+    const numeroPendientes = document.getElementById("numeroPendientes");
+    const listaAlertas = document.getElementById("listaAlertas");
+    const vacio = document.getElementById("vacio");
+
+    let filtroActual = "todas";
+
+    function actualizarContador() {
+
+        let pendientes = 0;
+
+        document.querySelectorAll(".alerta").forEach(function (alerta) {
+
+            if (alerta.classList.contains("no-leida")) {
+                pendientes++;
+            }
+
+        });
+
+        numeroPendientes.textContent = pendientes;
+    }
+
+    function filtrarAlertas() {
+
+        const texto = buscador.value.toLowerCase();
+        let visibles = 0;
+
+        document.querySelectorAll(".alerta").forEach(function (alerta) {
+
+            const contenido = alerta.innerText.toLowerCase();
+            const tipo = alerta.dataset.tipo;
+
+            let coincideTexto = contenido.includes(texto);
+            let coincideFiltro = true;
+
+            if (filtroActual === "no-leidas") {
+                coincideFiltro = alerta.classList.contains("no-leida");
+            }
+
+            if (filtroActual === "prestamos") {
+                coincideFiltro = tipo === "prestamos";
+            }
+
+            if (filtroActual === "reservas") {
+                coincideFiltro = tipo === "reservas";
+            }
+
+            if (coincideTexto && coincideFiltro) {
+                alerta.style.display = "flex";
+                visibles++;
+            } else {
+                alerta.style.display = "none";
+            }
+
+        });
+
+        vacio.style.display = visibles === 0 ? "block" : "none";
+    }
+
+    filtros.forEach(function (boton) {
+
+        boton.addEventListener("click", function () {
+
+            filtros.forEach(function (filtro) {
+                filtro.classList.remove("activo");
+            });
+
+            boton.classList.add("activo");
+            filtroActual = boton.dataset.filtro;
+
+            filtrarAlertas();
+        });
+
+    });
+
+    buscador.addEventListener("input", filtrarAlertas);
+
+    /* marcar una alerta como leída o no leída */
+
+    document.querySelectorAll(".boton-leer").forEach(function (boton) {
+
+        boton.addEventListener("click", function () {
+
+            const alerta = boton.closest(".alerta");
+            const estado = alerta.querySelector(".estado");
+
+            alerta.classList.toggle("no-leida");
+
+            if (alerta.classList.contains("no-leida")) {
+                estado.textContent = "Sin leer";
+                boton.textContent = "Marcar leída";
+            } else {
+                estado.textContent = "Leída";
+                boton.textContent = "Marcar sin leer";
+            }
+
+            actualizarContador();
+            filtrarAlertas();
+        });
+
+    });
+
+    /* eliminar alerta */
+
+    document.querySelectorAll(".boton-eliminar").forEach(function (boton) {
+
+        boton.addEventListener("click", function () {
+
+            const alerta = boton.closest(".alerta");
+            alerta.remove();
+
+            actualizarContador();
+            filtrarAlertas();
+        });
+
+    });
+
+    /* marcar todas como leídas */
+
+    document.getElementById("marcarTodas").addEventListener("click", function () {
+
+        document.querySelectorAll(".alerta").forEach(function (alerta) {
+
+            alerta.classList.remove("no-leida");
+
+            alerta.querySelector(".estado").textContent = "Leída";
+            alerta.querySelector(".boton-leer").textContent = "Marcar sin leer";
+
+        });
+
+        actualizarContador();
+        filtrarAlertas();
+    });
+
+    actualizarContador();
+    filtrarAlertas();
+</script>
+
+</body>
+</html>

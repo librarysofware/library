@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reservar libro - Library</title>
+
+    <style>
+
+        /* página */
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #242330;
+            color: white;
+        }
+
+        .pagina {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* menú */
+
+        .menu {
+            width: 200px;
+            min-height: 100vh;
+            background-color: #20202d;
+            padding: 25px 18px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .acciones {
+            margin-bottom: 30px;
+        }
+
+        .acciones a {
+            display: block;
+            color: #bdbdcc;
+            text-decoration: none;
+            padding: 10px 5px;
+            font-size: 14px;
+        }
+
+        .acciones a:hover {
+            color: white;
+        }
+
+        .acciones a.activo {
+            color: white;
+            font-weight: bold;
+        }
+
+        .generos h3 {
+            color: white;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .generos a {
+            display: block;
+            color: #bdbdcc;
+            text-decoration: none;
+            padding: 7px 5px;
+            font-size: 14px;
+        }
+
+        .generos a:hover {
+            color: white;
+        }
+
+
+        /* contenido */
+
+        .contenido {
+            flex: 1;
+            padding: 25px 35px;
+            box-sizing: border-box;
+        }
+
+
+        /* perfil */
+
+        .superior {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .perfil {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perfil img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .flecha {
+            color: #4da6ff;
+            font-size: 20px;
+        }
+
+
+        /* pasos */
+
+        .pasos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin: 15px 0 35px;
+        }
+
+        .paso {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #777684;
+            font-size: 14px;
+        }
+
+        .numero {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #30303f;
+            color: #aaa9b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .paso.activo {
+            color: white;
+        }
+
+        .paso.activo .numero {
+            background-color: #286fc7;
+            color: white;
+        }
+
+
+        /* título */
+
+        .titulo h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+        }
+
+        .titulo p {
+            color: #aaa9b8;
+            margin: 0 0 25px;
+            font-size: 14px;
+        }
+
+
+        /* reserva */
+
+        .reserva {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 25px;
+        }
+
+
+        /* información del libro */
+
+        .libro {
+            background-color: #2d2c3b;
+            padding: 22px;
+            border-radius: 10px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .libro img {
+            width: 135px;
+            height: 195px;
+            object-fit: cover;
+            border-radius: 7px;
+        }
+
+        .informacion h2 {
+            font-size: 20px;
+            margin: 0 0 18px;
+        }
+
+        .informacion p {
+            color: #aaa9b8;
+            font-size: 12px;
+            margin: 9px 0;
+        }
+
+        .informacion strong {
+            color: white;
+        }
+
+        .disponible {
+            display: inline-block;
+            background-color: #315b45;
+            color: #8ee6a8;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+
+        /* calendario */
+
+        .calendario-contenedor {
+            background-color: #2d2c3b;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .calendario-contenedor h2 {
+            margin: 0 0 5px;
+            font-size: 18px;
+        }
+
+        .instruccion {
+            color: #aaa9b8;
+            font-size: 12px;
+            margin: 0 0 15px;
+        }
+
+        .calendario {
+            background-color: #30303f;
+            border-radius: 8px;
+            padding: 14px;
+            max-width: 390px;
+            margin: auto;
+        }
+
+        .mes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .mes h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .flechas {
+            display: flex;
+            gap: 5px;
+        }
+
+        .flechas button {
+            border: none;
+            background-color: #242330;
+            color: white;
+            width: 27px;
+            height: 27px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .flechas button:hover {
+            background-color: #286fc7;
+        }
+
+
+        /* días */
+
+        .dias-semana,
+        .dias-mes {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .dias-semana div {
+            text-align: center;
+            color: #858492;
+            font-size: 10px;
+            padding: 5px 0;
+        }
+
+        .dia {
+            border: none;
+            background-color: transparent;
+            color: white;
+            height: 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .dia:hover {
+            background-color: #286fc7;
+        }
+
+        .dia.vacio {
+            cursor: default;
+        }
+
+        .dia.seleccionado {
+            background-color: #286fc7;
+            color: white;
+            font-weight: bold;
+        }
+
+        .dia.en-rango {
+            background-color: #263e5b;
+            color: #8db8ff;
+        }
+
+
+        /* fechas */
+
+        .fechas {
+            margin-top: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .fecha-box {
+            background-color: #242330;
+            padding: 9px;
+            border-radius: 6px;
+        }
+
+        .fecha-box small {
+            display: block;
+            color: #858492;
+            font-size: 10px;
+            margin-bottom: 5px;
+        }
+
+        .fecha-box strong {
+            color: white;
+            font-size: 11px;
+        }
+
+
+        /* duración */
+
+        .duracion {
+            margin-top: 9px;
+            padding: 9px;
+            background-color: #263e5b;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .duracion p {
+            margin: 0;
+            color: #aaa9b8;
+            font-size: 10px;
+        }
+
+        .duracion strong {
+            display: block;
+            color: #8db8ff;
+            font-size: 16px;
+            margin-top: 3px;
+        }
+
+
+        /* botones */
+
+        .botones {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .boton {
+            flex: 1;
+            padding: 12px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .volver {
+            background-color: transparent;
+            border: 1px solid #4da6ff;
+            color: #4da6ff;
+        }
+
+        .volver:hover {
+            background-color: #286fc7;
+            color: white;
+        }
+
+        .continuar {
+            background-color: #286fc7;
+            border: none;
+            color: white;
+        }
+
+        .continuar:hover {
+            background-color: #3985df;
+        }
+
+        .continuar:disabled {
+            background-color: #454455;
+            color: #777684;
+            cursor: not-allowed;
+        }
+
+
+        /* mensaje de éxito */
+
+        .exito {
+            display: none;
+            max-width: 500px;
+            margin: 80px auto;
+            background-color: #2d2c3b;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 25px #00000044;
+        }
+
+        .check {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background-color: #315b45;
+            color: #8ee6a8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: bold;
+        }
+
+        .exito h2 {
+            margin: 0 0 10px;
+            font-size: 22px;
+        }
+
+        .exito p {
+            color: #aaa9b8;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .boton-listo {
+            background-color: #286fc7;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .boton-listo:hover {
+            background-color: #3985df;
+        }
+
+
+        /* responsive */
+
+        @media (max-width: 900px) {
+
+            .reserva {
+                grid-template-columns: 1fr;
+            }
+
+            .calendario {
+                max-width: 100%;
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            .pagina {
+                display: block;
+            }
+
+            .menu {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .contenido {
+                padding: 20px;
+            }
+
+            .pasos {
+                gap: 10px;
+            }
+
+            .paso {
+                font-size: 11px;
+            }
+
+            .libro {
+                flex-direction: column;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="pagina">
+
+
+        <!-- menú -->
+
+        <aside class="menu">
+
+            <div class="logo">
+                LIBRARY
+            </div>
+
+
+            <div class="acciones">
+
+                <a href="pagina.html">
+                    🏠 Inicio
+                </a>
+
+                <a href="explorar.html">
+                    📚 Explorar libros
+                </a>
+
+                <a href="prestamos.html">
+                    📖 Mis préstamos
+                </a>
+
+                <a href="reservar.html" class="activo">
+                    🔖 Reservar libro
+                </a>
+
+                <a href="alertas.html">
+                    🔔 Alertas
+                </a>
+
+                <a href="qr.html">
+                    ▣ Mi código QR
+                </a>
+
+                <a href="perfil.html">
+                    👤 Mi perfil
+                </a>
+
+            </div>
+
+
+            <div class="generos">
+
+                <h3>Géneros</h3>
+
+                <a href="ficcion.html">Ficción</a>
+                <a href="novela.html">Novela</a>
+                <a href="cienciaficcion.html">Ciencia ficción</a>
+                <a href="fantasia.html">Fantasía</a>
+                <a href="noficcion.html">No ficción</a>
+                <a href="misterio.html">Misterio</a>
+                <a href="thriller.html">Thriller</a>
+                <a href="juvenil.html">Juvenil</a>
+                <a href="romance.html">Romance</a>
+                <a href="terror.html">Terror</a>
+                <a href="aventura.html">Aventura</a>
+                <a href="historia.html">Historia</a>
+                <a href="todos.html">Todos los libros</a>
+
+                <a href="https://www.google.com/maps" target="_blank">
+                    📍 Maps
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- contenido -->
+
+        <main class="contenido">
+
+
+            <!-- perfil -->
+
+            <div class="superior">
+
+                <div class="perfil">
+
+                    <img src="https://i.pravatar.cc/100?img=47">
+
+                    <span>Jessica</span>
+
+                    <span class="flecha">
+                        ⌄
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- pasos -->
+
+            <div class="pasos">
+
+                <div class="paso activo">
+
+                    <span class="numero">
+                        1
+                    </span>
+
+                    Seleccionar libro
+
+                </div>
+
+
+                <div class="paso activo">
+
+                    <span class="numero">
+                        2
+                    </span>
+
+                    Elegir fechas
+
+                </div>
+
+
+                <div class="paso">
+
+                    <span class="numero">
+                        3
+                    </span>
+
+                    Confirmar reserva
+
+                </div>
+
+            </div>
+
+
+            <!-- título -->
+
+            <div class="titulo">
+
+                <h1>
+                    Reservar libro
+                </h1>
+
+                <p>
+                    Selecciona las fechas en las que deseas tener el libro.
+                </p>
+
+            </div>
+
+
+            <!-- zona de reserva -->
+
+            <div id="zonaReserva">
+
+
+                <div class="reserva">
+
+
+                    <!-- libro -->
+
+                    <div class="libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780132350884-L.jpg">
+
+                        <div class="informacion">
+
+                            <h2>
+                                Tecnología e Informática
+                            </h2>
+
+                            <p>
+                                <strong>Autor:</strong>
+                                María P. Gómez
+                            </p>
+
+                            <p>
+                                <strong>Materia:</strong>
+                                Tecnología
+                            </p>
+
+                            <p>
+                                <strong>Editorial:</strong>
+                                Grupo Editorial
+                            </p>
+
+                            <span class="disponible">
+                                Disponible
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- calendario -->
+
+                    <div class="calendario-contenedor">
+
+                        <h2>
+                            📅 Selecciona las fechas
+                        </h2>
+
+                        <p class="instruccion">
+                            Elige el inicio y la fecha de devolución.
+                        </p>
+
+
+                        <div class="calendario">
+
+
+                            <div class="mes">
+
+                                <h3 id="nombreMes">
+                                    Agosto 2026
+                                </h3>
+
+                                <div class="flechas">
+
+                                    <button id="anterior">
+                                        ‹
+                                    </button>
+
+                                    <button id="siguiente">
+                                        ›
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="dias-semana">
+
+                                <div>L</div>
+                                <div>M</div>
+                                <div>X</div>
+                                <div>J</div>
+                                <div>V</div>
+                                <div>S</div>
+                                <div>D</div>
+
+                            </div>
+
+
+                            <div class="dias-mes" id="diasMes"></div>
+
+
+                            <div class="fechas">
+
+                                <div class="fecha-box">
+
+                                    <small>
+                                        Inicio
+                                    </small>
+
+                                    <strong id="fechaInicio">
+                                        Seleccionar
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="fecha-box">
+
+                                    <small>
+                                        Devolución
+                                    </small>
+
+                                    <strong id="fechaFin">
+                                        Seleccionar
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="duracion">
+
+                                <p>
+                                    Tiempo de préstamo
+                                </p>
+
+                                <strong id="cantidadDias">
+                                    Selecciona las fechas
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- botones -->
+
+                <div class="botones">
+
+                    <button class="boton volver" onclick="window.location.href='index.html'">
+                        ← Volver
+                    </button>
+
+                    <button class="boton continuar" id="continuar" disabled>
+                        Aceptar y enviar
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- mensaje de éxito -->
+
+            <div class="exito" id="exito">
+
+                <div class="check">
+                    ✓
+                </div>
+
+                <h2>
+                    ¡Reserva realizada!
+                </h2>
+
+                <p>
+                    El libro se ha enviado correctamente.
+                    Tu solicitud de préstamo ha sido registrada.
+                </p>
+
+                <button class="boton-listo" onclick="volverInicio()">
+                    Listo
+                </button>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+
+    <script>
+
+        /* calendario */
+
+        const diasMes = document.getElementById("diasMes");
+        const nombreMes = document.getElementById("nombreMes");
+
+        const fechaInicio = document.getElementById("fechaInicio");
+        const fechaFin = document.getElementById("fechaFin");
+
+        const cantidadDias = document.getElementById("cantidadDias");
+
+        const continuar = document.getElementById("continuar");
+
+        const zonaReserva = document.getElementById("zonaReserva");
+        const exito = document.getElementById("exito");
+
+
+        let fechaActual = new Date(2026, 7, 1);
+
+        let inicio = null;
+        let fin = null;
+
+
+        function crearCalendario() {
+
+            diasMes.innerHTML = "";
+
+            const año = fechaActual.getFullYear();
+            const mes = fechaActual.getMonth();
+
+
+            const nombresMeses = [
+                "Enero",
+                "Febrero",
+                "Marzo",
+                "Abril",
+                "Mayo",
+                "Junio",
+                "Julio",
+                "Agosto",
+                "Septiembre",
+                "Octubre",
+                "Noviembre",
+                "Diciembre"
+            ];
+
+
+            nombreMes.textContent =
+                nombresMeses[mes] + " " + año;
+
+
+            let primerDia =
+                new Date(año, mes, 1).getDay();
+
+
+            if (primerDia === 0) {
+                primerDia = 7;
+            }
+
+
+            const cantidad =
+                new Date(año, mes + 1, 0).getDate();
+
+
+            /* espacios */
+
+            for (let i = 1; i < primerDia; i++) {
+
+                const espacio =
+                    document.createElement("button");
+
+                espacio.className =
+                    "dia vacio";
+
+                diasMes.appendChild(espacio);
+
+            }
+
+
+            /* días */
+
+            for (let dia = 1; dia <= cantidad; dia++) {
+
+                const boton =
+                    document.createElement("button");
+
+                boton.className = "dia";
+
+                boton.textContent = dia;
+
+
+                const fecha =
+                    new Date(año, mes, dia);
+
+
+                if (
+                    inicio &&
+                    fecha.getTime() === inicio.getTime()
+                ) {
+
+                    boton.classList.add("seleccionado");
+
+                }
+
+
+                if (
+                    fin &&
+                    fecha.getTime() === fin.getTime()
+                ) {
+
+                    boton.classList.add("seleccionado");
+
+                }
+
+
+                if (
+                    inicio &&
+                    fin &&
+                    fecha > inicio &&
+                    fecha < fin
+                ) {
+
+                    boton.classList.add("en-rango");
+
+                }
+
+
+                boton.addEventListener(
+                    "click",
+                    function () {
+
+                        seleccionarFecha(fecha);
+
+                    }
+                );
+
+
+                diasMes.appendChild(boton);
+
+            }
+
+        }
+
+
+        function seleccionarFecha(fecha) {
+
+
+            /* seleccionar inicio */
+
+            if (!inicio || (inicio && fin)) {
+
+                inicio = fecha;
+
+                fin = null;
+
+
+                fechaInicio.textContent =
+                    formatoFecha(inicio);
+
+                fechaFin.textContent =
+                    "Seleccionar";
+
+                cantidadDias.textContent =
+                    "Selecciona la devolución";
+
+                continuar.disabled = true;
+
+            }
+
+
+            /* seleccionar devolución */
+
+            else if (fecha > inicio) {
+
+                fin = fecha;
+
+
+                fechaFin.textContent =
+                    formatoFecha(fin);
+
+
+                const diferencia =
+                    fin.getTime() - inicio.getTime();
+
+
+                const dias =
+                    Math.ceil(
+                        diferencia /
+                        (1000 * 60 * 60 * 24)
+                    );
+
+
+                cantidadDias.textContent =
+                    dias + " días";
+
+
+                continuar.disabled = false;
+
+            }
+
+
+            /* cambiar fecha de inicio */
+
+            else {
+
+                inicio = fecha;
+
+                fin = null;
+
+
+                fechaInicio.textContent =
+                    formatoFecha(inicio);
+
+                fechaFin.textContent =
+                    "Seleccionar";
+
+                cantidadDias.textContent =
+                    "Selecciona la devolución";
+
+                continuar.disabled = true;
+
+            }
+
+
+            crearCalendario();
+
+        }
+
+
+        function formatoFecha(fecha) {
+
+            const dia =
+                String(fecha.getDate()).padStart(2, "0");
+
+            const mes =
+                String(fecha.getMonth() + 1).padStart(2, "0");
+
+            const año =
+                fecha.getFullYear();
+
+
+            return dia + "/" + mes + "/" + año;
+
+        }
+
+
+        /* mes anterior */
+
+        document.getElementById("anterior")
+            .addEventListener("click", function () {
+
+                fechaActual.setMonth(
+                    fechaActual.getMonth() - 1
+                );
+
+                crearCalendario();
+
+            });
+
+
+        /* mes siguiente */
+
+        document.getElementById("siguiente")
+            .addEventListener("click", function () {
+
+                fechaActual.setMonth(
+                    fechaActual.getMonth() + 1
+                );
+
+                crearCalendario();
+
+            });
+
+
+        /* aceptar y enviar */
+
+        continuar.addEventListener(
+            "click",
+            function () {
+
+                zonaReserva.style.display = "none";
+
+                exito.style.display = "block";
+
+            }
+        );
+
+
+        /* volver a la página principal */
+
+        function volverInicio() {
+
+            window.location.href = "pagina.html";
+
+        }
+
+
+        /* iniciar */
+
+        crearCalendario();
+
+    </script>
+
+</body>
+
+</html>

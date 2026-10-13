@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasía - Library</title>
+
+    <style>
+
+        /* página */
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #242330;
+            color: white;
+        }
+
+        .pagina {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* menú */
+
+        .menu {
+            width: 200px;
+            min-height: 100vh;
+            background-color: #20202d;
+            padding: 25px 18px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .acciones {
+            margin-bottom: 30px;
+        }
+
+        .acciones a {
+            display: block;
+            color: #bdbdcc;
+            text-decoration: none;
+            padding: 10px 5px;
+            font-size: 14px;
+        }
+
+        .acciones a:hover {
+            color: white;
+        }
+
+        .generos h3 {
+            color: white;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .generos a {
+            display: block;
+            color: #bdbdcc;
+            text-decoration: none;
+            padding: 7px 5px;
+            font-size: 14px;
+        }
+
+        .generos a:hover {
+            color: white;
+        }
+
+        .generos a.activo {
+            color: white;
+            font-weight: bold;
+        }
+
+        /* contenido */
+
+        .contenido {
+            flex: 1;
+            padding: 25px 30px;
+            box-sizing: border-box;
+        }
+
+        /* parte superior */
+
+        .superior {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .ubicacion {
+            color: #bdbdcc;
+            font-size: 13px;
+        }
+
+        .perfil {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perfil img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .perfil span {
+            color: white;
+        }
+
+        .flecha {
+            color: #4da6ff;
+            font-size: 20px;
+        }
+
+        /* título */
+
+        .titulo h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .titulo p {
+            color: #aaa9b8;
+            margin-top: 8px;
+        }
+
+        /* búsqueda */
+
+        .buscar {
+            margin: 25px 0;
+        }
+
+        .buscar input {
+            width: 100%;
+            max-width: 500px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background-color: #30303f;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .buscar input::placeholder {
+            color: #aaa9b8;
+        }
+
+        /* libros */
+
+        .seccion {
+            margin-top: 30px;
+        }
+
+        .seccion h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .libros {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .libro {
+            min-width: 0;
+        }
+
+        .libro img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 7px;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .libro img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+        }
+
+        .libro h3 {
+            font-size: 14px;
+            margin: 8px 0 4px;
+        }
+
+        .libro p {
+            color: #aaa9b8;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        /* responsive */
+
+        @media (max-width: 1100px) {
+
+            .libros {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            .pagina {
+                display: block;
+            }
+
+            .menu {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .libros {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="pagina">
+
+        <!-- menú -->
+
+        <aside class="menu">
+
+            <div class="logo">
+                LIBRARY
+            </div>
+
+            <div class="acciones">
+
+                <a href="pagina.html">🏠 Inicio</a>
+
+                <a href="explorar.html">📚 Explorar libros</a>
+
+                <a href="prestamos.html">📖 Mis préstamos</a>
+
+                <a href="reservar.html">🔖 Reservar libro</a>
+
+                <a href="alertas.html">🔔 Alertas</a>
+
+                <a href="qr.html">▣ Mi código QR</a>
+
+                <a href="perfil.html">👤 Mi perfil</a>
+
+            </div>
+
+            <div class="generos">
+
+                <h3>Géneros</h3>
+
+                <a href="ficcion.html">Ficción</a>
+
+                <a href="novela.html">Novela</a>
+
+                <a href="cienciaficcion.html">Ciencia ficción</a>
+
+                <a href="fantasia.html" class="activo">Fantasía</a>
+
+                <a href="noficcion.html">No ficción</a>
+
+                <a href="misterio.html">Misterio</a>
+
+                <a href="thriller.html">Thriller</a>
+
+                <a href="juvenil.html">Juvenil</a>
+
+                <a href="romance.html">Romance</a>
+
+                <a href="terror.html">Terror</a>
+
+                <a href="aventura.html">Aventura</a>
+
+                <a href="historia.html">Historia</a>
+
+                <a href="todos.html">Todos los libros</a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- contenido -->
+
+        <main class="contenido">
+
+            <div class="superior">
+
+                <div class="ubicacion">
+                    📍 Medellín, Colombia
+                </div>
+
+                <div class="perfil">
+
+                    <img src="https://i.pravatar.cc/100?img=47">
+
+                    <span>Jessica</span>
+
+                    <span class="flecha">⌄</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="titulo">
+
+                <h1>Fantasía</h1>
+
+                <p>
+                    Descubre mundos mágicos, criaturas increíbles y aventuras inolvidables.
+                </p>
+
+            </div>
+
+
+            <!-- búsqueda -->
+
+            <div class="buscar">
+
+                <input
+                    type="text"
+                    id="buscar"
+                    placeholder="🔍 Buscar un libro de fantasía..."
+                >
+
+            </div>
+
+
+            <!-- libros -->
+
+            <div class="seccion">
+
+                <h2>Más populares</h2>
+
+                <div class="libros">
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg">
+                        <h3>El Hobbit</h3>
+                        <p>J. R. R. Tolkien</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780439554930-L.jpg">
+                        <h3>Harry Potter y la piedra filosofal</h3>
+                        <p>J. K. Rowling</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780064400558-L.jpg">
+                        <h3>Las crónicas de Narnia</h3>
+                        <p>C. S. Lewis</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780064471046-L.jpg">
+                        <h3>Eragon</h3>
+                        <p>Christopher Paolini</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780142407332-L.jpg">
+                        <h3>Coraline</h3>
+                        <p>Neil Gaiman</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780756404741-L.jpg">
+                        <h3>El nombre del viento</h3>
+                        <p>Patrick Rothfuss</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780553573404-L.jpg">
+                        <h3>Juego de tronos</h3>
+                        <p>George R. R. Martin</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="seccion">
+
+                <h2>Recomendados</h2>
+
+                <div class="libros">
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780553386790-L.jpg">
+                        <h3>El camino de los reyes</h3>
+                        <p>Brandon Sanderson</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780765376671-L.jpg">
+                        <h3>Trono de cristal</h3>
+                        <p>Sarah J. Maas</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9781596431522-L.jpg">
+                        <h3>La historia interminable</h3>
+                        <p>Michael Ende</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780064407311-L.jpg">
+                        <h3>El príncipe Caspian</h3>
+                        <p>C. S. Lewis</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780316129084-L.jpg">
+                        <h3>La brújula dorada</h3>
+                        <p>Philip Pullman</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780062024039-L.jpg">
+                        <h3>Cazadores de sombras</h3>
+                        <p>Cassandra Clare</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780062457738-L.jpg">
+                        <h3>Una corte de rosas y espinas</h3>
+                        <p>Sarah J. Maas</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="seccion">
+
+                <h2>Fantasía juvenil</h2>
+
+                <div class="libros">
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780439023481-L.jpg">
+                        <h3>Los juegos del hambre</h3>
+                        <p>Suzanne Collins</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780545010221-L.jpg">
+                        <h3>Harry Potter y el misterio del príncipe</h3>
+                        <p>J. K. Rowling</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780590353427-L.jpg">
+                        <h3>Harry Potter</h3>
+                        <p>J. K. Rowling</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9781595141750-L.jpg">
+                        <h3>Academia de vampiros</h3>
+                        <p>Richelle Mead</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780544334648-L.jpg">
+                        <h3>La reina roja</h3>
+                        <p>Victoria Aveyard</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780064407663-L.jpg">
+                        <h3>El castillo ambulante</h3>
+                        <p>Diana Wynne Jones</p>
+                    </div>
+
+                    <div class="libro">
+                        <img src="https://covers.openlibrary.org/b/isbn/9780064471096-L.jpg">
+                        <h3>Eragon</h3>
+                        <p>Christopher Paolini</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- búsqueda -->
+
+    <script>
+
+        const buscador = document.getElementById("buscar");
+        const libros = document.querySelectorAll(".libro");
+
+        buscador.addEventListener("input", function () {
+
+            const texto = buscador.value.toLowerCase();
+
+            libros.forEach(function (libro) {
+
+                const nombre = libro.innerText.toLowerCase();
+
+                if (nombre.includes(texto)) {
+                    libro.style.display = "block";
+                } else {
+                    libro.style.display = "none";
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

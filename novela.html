@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Novela - Library</title>
+
+    <style>
+
+        /* página */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #242330;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .pagina {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            background-color: #242330;
+        }
+
+        /* menú */
+        .menu {
+            width: 200px;
+            min-height: 100vh;
+            background-color: #20202d;
+            padding: 25px 18px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 21px;
+            margin-bottom: 35px;
+            color: white;
+        }
+
+        .menu h4 {
+            font-size: 12px;
+            margin-bottom: 15px;
+            color: #dddbea;
+        }
+
+        .menu a {
+            display: block;
+            color: #aaa9bb;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .menu a:hover {
+            color: white;
+        }
+
+        /* géneros */
+        .generos {
+            margin-top: 28px;
+        }
+
+        .generos h4 {
+            color: white;
+            font-size: 13px;
+            margin-bottom: 17px;
+        }
+
+        .generos a {
+            display: block;
+            color: #aaa9bb;
+            text-decoration: none;
+            margin-bottom: 13px;
+            font-size: 13px;
+        }
+
+        .generos a:hover {
+            color: white;
+        }
+
+        .generos .activo {
+            color: white;
+            font-weight: bold;
+        }
+
+        /* ubicación */
+        .ubicacion {
+            margin-top: 28px;
+        }
+
+        .ubicacion h4 {
+            font-size: 13px;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .ubicacion a {
+            display: block;
+            margin: 0;
+        }
+
+        .ubicacion iframe {
+            width: 100%;
+            height: 125px;
+            border: 0;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .ubicacion p {
+            font-size: 10px;
+            color: #aaa9bb;
+            margin-top: 7px;
+            line-height: 14px;
+        }
+
+        /* contenido */
+        .contenido {
+            flex: 1;
+            padding: 25px;
+            min-width: 0;
+        }
+
+        /* parte de arriba */
+        .arriba {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .buscador {
+            flex: 1;
+            max-width: 600px;
+            background-color: #373647;
+            border: none;
+            border-radius: 25px;
+            padding: 13px 18px;
+            color: white;
+            outline: none;
+        }
+
+        .buscador::placeholder {
+            color: #aaa9bb;
+        }
+
+        .perfil {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perfil img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .perfil span {
+            color: white;
+            font-size: 13px;
+        }
+
+        .flecha {
+            color: #5791ff;
+            font-size: 18px;
+        }
+
+        .campana {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        /* título */
+        .titulo-principal {
+            margin-bottom: 25px;
+        }
+
+        .titulo-principal h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .titulo-principal p {
+            color: #aaa9bb;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        /* libros */
+        .titulo-seccion {
+            font-size: 18px;
+            margin: 25px 0 18px;
+        }
+
+        .libros {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .libro {
+            min-width: 0;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .libro:hover {
+            transform: translateY(-8px);
+        }
+
+        .libro img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 7px;
+            display: block;
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .libro h3 {
+            font-size: 12px;
+            margin: 9px 0 4px;
+            color: white;
+        }
+
+        .libro p {
+            font-size: 10px;
+            color: #aaa9bb;
+            margin: 0;
+        }
+
+        .estrellas {
+            color: #ffc400;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* filas */
+        .fila-libros {
+            margin-bottom: 40px;
+        }
+
+        /* responsive */
+        @media (max-width: 1100px) {
+
+            .libros {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            .pagina {
+                display: block;
+            }
+
+            .menu {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .generos {
+                display: none;
+            }
+
+            .ubicacion {
+                display: none;
+            }
+
+            .contenido {
+                padding: 18px;
+            }
+
+            .libros {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="pagina">
+
+        <!-- menú -->
+        <aside class="menu">
+
+            <div class="logo">
+                Library
+            </div>
+
+            <!-- acciones -->
+            <h4>ACCIONES</h4>
+
+            <a href="pagina.html">🏠 Inicio</a>
+
+            <a href="explorar.html">📖 Explorar libros</a>
+
+            <a href="prestamos.html">🏷️ Mis préstamos</a>
+
+            <a href="#" onclick="reservar()">🗓️ Reservar libro</a>
+
+            <a href="#" onclick="mostrarAlerta()">🔔 Alertas</a>
+
+            <a href="#" onclick="mostrarQR()">▦ Mi código QR</a>
+
+            <a href="#">👤 Mi perfil</a>
+
+
+            <!-- géneros -->
+            <div class="generos">
+
+                <h4>GÉNEROS</h4>
+
+                <a href="ficcion.html">Ficción</a>
+
+                <a href="novela.html" class="activo">
+                    Novela
+                </a>
+
+                <a href="cienciaficcion.html">
+                    Ciencia ficción
+                </a>
+
+                <a href="fantasia.html">
+                    Fantasía
+                </a>
+
+                <a href="noficcion.html">
+                    No ficción
+                </a>
+
+                <a href="misterio.html">
+                    Misterio
+                </a>
+
+                <a href="thriller.html">
+                    Thriller
+                </a>
+
+                <a href="juvenil.html">
+                    Juvenil
+                </a>
+
+                <a href="romance.html">
+                    Romance
+                </a>
+
+                <a href="terror.html">
+                    Terror
+                </a>
+
+                <a href="aventura.html">
+                    Aventura
+                </a>
+
+                <a href="historia.html">
+                    Historia
+                </a>
+
+                <a href="pagina.html">
+                    Ver todos ↓
+                </a>
+
+            </div>
+
+
+            <!-- ubicación -->
+            <div class="ubicacion">
+
+                <h4>📍 Ubicación</h4>
+
+                <a
+                    href="https://www.google.com/maps/search/?api=1&query=Calle+53+No+40-65,+Medellín"
+                    target="_blank">
+
+                    <iframe
+                        src="https://www.google.com/maps?q=Calle%2053%20No%2040-65,%20Medell%C3%ADn&output=embed"
+                        loading="lazy">
+                    </iframe>
+
+                </a>
+
+                <p>
+                    Calle 53 No 40-65, Medellín
+                </p>
+
+            </div>
+
+        </aside>
+
+
+        <!-- contenido -->
+        <main class="contenido">
+
+            <!-- parte de arriba -->
+            <div class="arriba">
+
+                <input
+                    type="text"
+                    class="buscador"
+                    id="buscador"
+                    placeholder="🔍 Buscar una novela..."
+                >
+
+                <div class="perfil">
+
+                    <div class="campana">
+                        🔔
+                    </div>
+
+                    <img
+                        src="https://i.pravatar.cc/100?img=47"
+                        alt="Perfil"
+                    >
+
+                    <span>Jessica</span>
+
+                    <span class="flecha">⌄</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- título -->
+            <div class="titulo-principal">
+
+                <h1>Novela</h1>
+
+                <p>
+                    Descubre historias inolvidables, personajes y grandes aventuras.
+                </p>
+
+            </div>
+
+
+            <!-- primera fila -->
+            <div class="fila-libros">
+
+                <h2 class="titulo-seccion">
+                    Libros de novela
+                </h2>
+
+                <div class="libros">
+
+
+                    <!-- libro 1 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780307474278-L.jpg"
+                            alt="Cien años de soledad"
+                        >
+
+                        <h3>
+                            Cien años de soledad
+                        </h3>
+
+                        <p>
+                            Gabriel García Márquez
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 2 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780141439518-L.jpg"
+                            alt="Orgullo y prejuicio"
+                        >
+
+                        <h3>
+                            Orgullo y prejuicio
+                        </h3>
+
+                        <p>
+                            Jane Austen
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 3 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg"
+                            alt="Matar a un ruiseñor"
+                        >
+
+                        <h3>
+                            Matar a un ruiseñor
+                        </h3>
+
+                        <p>
+                            Harper Lee
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 4 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg"
+                            alt="1984"
+                        >
+
+                        <h3>
+                            1984
+                        </h3>
+
+                        <p>
+                            George Orwell
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 5 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780307387899-L.jpg"
+                            alt="El amor en los tiempos del cólera"
+                        >
+
+                        <h3>
+                            El amor en los tiempos del cólera
+                        </h3>
+
+                        <p>
+                            Gabriel García Márquez
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 6 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780142437230-L.jpg"
+                            alt="Jane Eyre"
+                        >
+
+                        <h3>
+                            Jane Eyre
+                        </h3>
+
+                        <p>
+                            Charlotte Brontë
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 7 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780141439662-L.jpg"
+                            alt="Grandes esperanzas"
+                        >
+
+                        <h3>
+                            Grandes esperanzas
+                        </h3>
+
+                        <p>
+                            Charles Dickens
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★☆
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- segunda fila -->
+            <div class="fila-libros">
+
+                <h2 class="titulo-seccion">
+                    Más novelas
+                </h2>
+
+                <div class="libros">
+
+
+                    <!-- libro 8 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780140449266-L.jpg"
+                            alt="Anna Karenina"
+                        >
+
+                        <h3>
+                            Anna Karenina
+                        </h3>
+
+                        <p>
+                            León Tolstói
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 9 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780141441146-L.jpg"
+                            alt="El gran Gatsby"
+                        >
+
+                        <h3>
+                            El gran Gatsby
+                        </h3>
+
+                        <p>
+                            F. Scott Fitzgerald
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 10 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780141439662-L.jpg"
+                            alt="David Copperfield"
+                        >
+
+                        <h3>
+                            David Copperfield
+                        </h3>
+
+                        <p>
+                            Charles Dickens
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★☆
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 11 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780142437230-L.jpg"
+                            alt="Cumbres borrascosas"
+                        >
+
+                        <h3>
+                            Cumbres borrascosas
+                        </h3>
+
+                        <p>
+                            Emily Brontë
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 12 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780142437179-L.jpg"
+                            alt="Madame Bovary"
+                        >
+
+                        <h3>
+                            Madame Bovary
+                        </h3>
+
+                        <p>
+                            Gustave Flaubert
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★☆
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 13 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780140449266-L.jpg"
+                            alt="Los miserables"
+                        >
+
+                        <h3>
+                            Los miserables
+                        </h3>
+
+                        <p>
+                            Victor Hugo
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 14 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780140449136-L.jpg"
+                            alt="Crimen y castigo"
+                        >
+
+                        <h3>
+                            Crimen y castigo
+                        </h3>
+
+                        <p>
+                            Fiódor Dostoyevski
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- tercera fila -->
+            <div class="fila-libros">
+
+                <h2 class="titulo-seccion">
+                    Novelas recomendadas
+                </h2>
+
+                <div class="libros">
+
+
+                    <!-- libro 15 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780141439518-L.jpg"
+                            alt="Sentido y sensibilidad"
+                        >
+
+                        <h3>
+                            Sentido y sensibilidad
+                        </h3>
+
+                        <p>
+                            Jane Austen
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 16 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780142437247-L.jpg"
+                            alt="La isla del tesoro"
+                        >
+
+                        <h3>
+                            La isla del tesoro
+                        </h3>
+
+                        <p>
+                            Robert Louis Stevenson
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 17 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780140447938-L.jpg"
+                            alt="El conde de Montecristo"
+                        >
+
+                        <h3>
+                            El conde de Montecristo
+                        </h3>
+
+                        <p>
+                            Alexandre Dumas
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 18 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780140449266-L.jpg"
+                            alt="La divina comedia"
+                        >
+
+                        <h3>
+                            La divina comedia
+                        </h3>
+
+                        <p>
+                            Dante Alighieri
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★☆
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 19 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780142437230-L.jpg"
+                            alt="El retrato de Dorian Gray"
+                        >
+
+                        <h3>
+                            El retrato de Dorian Gray
+                        </h3>
+
+                        <p>
+                            Oscar Wilde
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★★
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 20 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780140449181-L.jpg"
+                            alt="La metamorfosis"
+                        >
+
+                        <h3>
+                            La metamorfosis
+                        </h3>
+
+                        <p>
+                            Franz Kafka
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★☆
+                        </div>
+
+                    </div>
+
+
+                    <!-- libro 21 -->
+                    <div class="libro">
+
+                        <img
+                            src="https://covers.openlibrary.org/b/isbn/9780142437179-L.jpg"
+                            alt="La letra escarlata"
+                        >
+
+                        <h3>
+                            La letra escarlata
+                        </h3>
+
+                        <p>
+                            Nathaniel Hawthorne
+                        </p>
+
+                        <div class="estrellas">
+                            ★★★★☆
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <script>
+
+        /* reservar */
+        function reservar() {
+            alert("Aquí puedes reservar un libro.");
+        }
+
+        /* alertas */
+        function mostrarAlerta() {
+            alert("No tienes nuevas alertas.");
+        }
+
+        /* código QR */
+        function mostrarQR() {
+            alert("Aquí aparecerá tu código QR.");
+        }
+
+        /* buscador */
+        document.getElementById("buscador").addEventListener("keyup", function () {
+
+            let texto = this.value.toLowerCase();
+
+            let libros = document.querySelectorAll(".libro");
+
+            libros.forEach(function (libro) {
+
+                let nombre = libro.innerText.toLowerCase();
+
+                if (nombre.includes(texto)) {
+
+                    libro.style.display = "block";
+
+                } else {
+
+                    libro.style.display = "none";
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

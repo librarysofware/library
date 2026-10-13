@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis préstamos - Library</title>
+
+    <style>
+
+        /* página */
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #242330;
+            color: white;
+        }
+
+        .pagina {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* menú */
+
+        .menu {
+            width: 200px;
+            min-height: 100vh;
+            background-color: #20202d;
+            padding: 25px 18px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .acciones {
+            margin-bottom: 30px;
+        }
+
+        .acciones a {
+            display: block;
+            color: #bdbdcc;
+            text-decoration: none;
+            padding: 10px 5px;
+            font-size: 14px;
+        }
+
+        .acciones a:hover {
+            color: white;
+        }
+
+        .acciones a.activo {
+            color: white;
+            font-weight: bold;
+        }
+
+        .generos h3 {
+            color: white;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .generos a {
+            display: block;
+            color: #bdbdcc;
+            text-decoration: none;
+            padding: 7px 5px;
+            font-size: 14px;
+        }
+
+        .generos a:hover {
+            color: white;
+        }
+
+
+        /* contenido */
+
+        .contenido {
+            flex: 1;
+            padding: 25px 30px;
+            box-sizing: border-box;
+        }
+
+
+        /* parte superior */
+
+        .superior {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .perfil {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perfil img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .flecha {
+            color: #4da6ff;
+            font-size: 20px;
+        }
+
+
+        /* título */
+
+        .titulo h1 {
+            color: white;
+            font-size: 32px;
+            margin: 0 0 25px 0;
+        }
+
+
+        /* tabla */
+
+        .tabla {
+            width: 100%;
+            background-color: #2d2c3b;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px #00000033;
+        }
+
+        .fila {
+            display: grid;
+            grid-template-columns: 2.2fr 1.3fr 1.3fr 1fr 0.8fr;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 20px;
+            box-sizing: border-box;
+        }
+
+        .encabezado {
+            background-color: #30303f;
+            color: #aaa9b8;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .prestamo {
+            border-top: 1px solid #454455;
+            min-height: 80px;
+        }
+
+
+        /* libro */
+
+        .informacion-libro {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .informacion-libro img {
+            width: 48px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .informacion-libro h3 {
+            font-size: 14px;
+            margin: 0 0 5px 0;
+            color: white;
+        }
+
+        .informacion-libro p {
+            color: #aaa9b8;
+            font-size: 11px;
+            margin: 0;
+        }
+
+
+        /* fechas */
+
+        .fecha {
+            color: #c5c5d2;
+            font-size: 13px;
+        }
+
+
+        /* días */
+
+        .dias {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .rojo {
+            color: #ff6262;
+        }
+
+        .amarillo {
+            color: #ffc857;
+        }
+
+
+        /* estado */
+
+        .estado {
+            display: inline-block;
+            width: fit-content;
+            padding: 7px 13px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .activo {
+            background-color: #315b45;
+            color: #8ee6a8;
+        }
+
+        .devuelto {
+            background-color: #343c5d;
+            color: #8db8ff;
+        }
+
+
+        /* alerta */
+
+        .alerta {
+            margin-top: 25px;
+            padding: 18px 20px;
+            background-color: #3a3038;
+            border: 1px solid #63434d;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .alerta-icono {
+            font-size: 28px;
+        }
+
+        .alerta p {
+            margin: 0;
+            color: #ffb5b5;
+            font-size: 13px;
+        }
+
+        .alerta strong {
+            color: #ff6b6b;
+        }
+
+
+        /* botón */
+
+        .boton-renovar {
+            width: 100%;
+            margin-top: 15px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background-color: #286fc7;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .boton-renovar:hover {
+            background-color: #3985df;
+        }
+
+
+        /* responsive */
+
+        @media (max-width: 900px) {
+
+            .fila {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
+
+            .encabezado div:nth-child(4),
+            .encabezado div:nth-child(5),
+            .prestamo > .dias,
+            .prestamo > .estado {
+                display: none;
+            }
+
+        }
+
+
+        @media (max-width: 750px) {
+
+            .pagina {
+                display: block;
+            }
+
+            .menu {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .superior {
+                justify-content: flex-start;
+            }
+
+            .contenido {
+                padding: 20px;
+            }
+
+            .tabla {
+                overflow-x: auto;
+            }
+
+            .fila {
+                min-width: 650px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="pagina">
+
+
+        <!-- menú -->
+
+        <aside class="menu">
+
+            <div class="logo">
+                LIBRARY
+            </div>
+
+
+            <div class="acciones">
+
+                <a href="pagina.html">
+                    🏠 Inicio
+                </a>
+
+                <a href="explorar.html">
+                    📚 Explorar libros
+                </a>
+
+                <a href="prestamos.html" class="activo">
+                    📖 Mis préstamos
+                </a>
+
+                <a href="reservar.html">
+                    🔖 Reservar libro
+                </a>
+
+                <a href="alertas.html">
+                    🔔 Alertas
+                </a>
+
+                <a href="qr.html">
+                    ▣ Mi código QR
+                </a>
+
+                <a href="perfil.html">
+                    👤 Mi perfil
+                </a>
+
+            </div>
+
+
+            <div class="generos">
+
+                <h3>Géneros</h3>
+
+                <a href="ficcion.html">Ficción</a>
+                <a href="novela.html">Novela</a>
+                <a href="cienciaficcion.html">Ciencia ficción</a>
+                <a href="fantasia.html">Fantasía</a>
+                <a href="noficcion.html">No ficción</a>
+                <a href="misterio.html">Misterio</a>
+                <a href="thriller.html">Thriller</a>
+                <a href="juvenil.html">Juvenil</a>
+                <a href="romance.html">Romance</a>
+                <a href="terror.html">Terror</a>
+                <a href="aventura.html">Aventura</a>
+                <a href="historia.html">Historia</a>
+                <a href="todos.html">Todos los libros</a>
+
+                <a href="https://www.google.com/maps" target="_blank">
+                    📍 Maps
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- contenido -->
+
+        <main class="contenido">
+
+
+            <!-- perfil -->
+
+            <div class="superior">
+
+                <div class="perfil">
+
+                    <img src="https://i.pravatar.cc/100?img=47">
+
+                    <span>Jessica</span>
+
+                    <span class="flecha">
+                        ⌄
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- título -->
+
+            <div class="titulo">
+
+                <h1>
+                    Mis préstamos activos
+                </h1>
+
+            </div>
+
+
+            <!-- tabla -->
+
+            <div class="tabla">
+
+
+                <!-- encabezado -->
+
+                <div class="fila encabezado">
+
+                    <div>
+                        Libro
+                    </div>
+
+                    <div>
+                        Fecha de préstamo
+                    </div>
+
+                    <div>
+                        Fecha de devolución
+                    </div>
+
+                    <div>
+                        Días restantes
+                    </div>
+
+                    <div>
+                        Estado
+                    </div>
+
+                </div>
+
+
+                <!-- préstamo 1 -->
+
+                <div class="fila prestamo">
+
+                    <div class="informacion-libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780132350884-L.jpg">
+
+                        <div>
+
+                            <h3>
+                                Tecnología e Informática
+                            </h3>
+
+                            <p>
+                                María P. Gómez
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="fecha">
+                        25/07/2026
+                    </div>
+
+
+                    <div class="fecha">
+                        15/08/2026
+                    </div>
+
+
+                    <div class="dias rojo">
+                        3 días
+                    </div>
+
+
+                    <div>
+                        <span class="estado activo">
+                            Activo
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- préstamo 2 -->
+
+                <div class="fila prestamo">
+
+                    <div class="informacion-libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780131873254-L.jpg">
+
+                        <div>
+
+                            <h3>
+                                English Grammar in Use
+                            </h3>
+
+                            <p>
+                                Raymond Murphy
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="fecha">
+                        30/07/2026
+                    </div>
+
+
+                    <div class="fecha">
+                        20/08/2026
+                    </div>
+
+
+                    <div class="dias amarillo">
+                        7 días
+                    </div>
+
+
+                    <div>
+                        <span class="estado activo">
+                            Activo
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- préstamo 3 -->
+
+                <div class="fila prestamo">
+
+                    <div class="informacion-libro">
+
+                        <img src="https://covers.openlibrary.org/b/isbn/9780060883287-L.jpg">
+
+                        <div>
+
+                            <h3>
+                                Cien años de soledad
+                            </h3>
+
+                            <p>
+                                Gabriel García Márquez
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="fecha">
+                        05/07/2026
+                    </div>
+
+
+                    <div class="fecha">
+                        22/07/2026
+                    </div>
+
+
+                    <div class="dias">
+                        —
+                    </div>
+
+
+                    <div>
+                        <span class="estado devuelto">
+                            Devuelto
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- alerta -->
+
+            <div class="alerta">
+
+                <div class="alerta-icono">
+                    🔔
+                </div>
+
+                <p>
+                    <strong>¡Atención!</strong>
+                    Tienes 3 días para devolver
+                    <strong>“Tecnología e Informática”</strong>.
+                    Evita sanciones por retraso.
+                </p>
+
+            </div>
+
+
+            <!-- botón -->
+
+            <button class="boton-renovar">
+                ⟳ &nbsp; Renovar préstamo
+            </button>
+
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

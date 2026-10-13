@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi perfil - LIBRARY</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #242330;
+            color: white;
+        }
+
+        .contenedor {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Menú lateral */
+        .menu {
+            width: 220px;
+            background-color: #20202d;
+            padding: 25px 18px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #d8c4ff;
+            text-align: center;
+            margin-bottom: 35px;
+            letter-spacing: 2px;
+        }
+
+        .menu a {
+            display: block;
+            color: #d2d0df;
+            text-decoration: none;
+            padding: 11px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .menu a:hover,
+        .menu a.activo {
+            background-color: #454158;
+            color: white;
+        }
+
+        .generos h3 {
+            color: #9f98bd;
+            font-size: 12px;
+            margin-top: 28px;
+            letter-spacing: 1px;
+        }
+
+        /* Contenido principal */
+        .contenido {
+            flex: 1;
+            padding: 30px;
+            min-width: 0;
+        }
+
+        .barra-superior {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .barra-superior h1 {
+            font-size: 27px;
+            margin: 0;
+        }
+
+        .buscador {
+            background-color: #30303f;
+            border: 1px solid #444256;
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: white;
+            width: 260px;
+            max-width: 100%;
+        }
+
+        .descripcion {
+            color: #b9b6ca;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        /* Tarjeta del perfil */
+        .tarjeta {
+            max-width: 1000px;
+            background-color: #2d2c3b;
+            border: 1px solid #39384a;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .portada {
+            height: 125px;
+            background: linear-gradient(
+                120deg,
+                #51436f,
+                #33334b,
+                #62517e
+            );
+        }
+
+        .cabecera-perfil {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 0 30px;
+            margin-top: -45px;
+        }
+
+        .foto-perfil {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 5px solid #2d2c3b;
+            object-fit: cover;
+        }
+
+        .nombre h2 {
+            margin: 10px 0 5px;
+            font-size: 23px;
+        }
+
+        .nombre p {
+            color: #c1bdd2;
+            margin: 5px 0;
+        }
+
+        .estado {
+            display: inline-block;
+            margin-top: 7px;
+            color: #a9e8c0;
+            background-color: #294638;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .informacion {
+            padding: 25px 30px 30px;
+        }
+
+        .titulo-seccion {
+            font-size: 18px;
+            margin: 10px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #454256;
+        }
+
+        .formulario {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .campo.completo {
+            grid-column: 1 / -1;
+        }
+
+        .campo label {
+            font-size: 13px;
+            color: #c5c1d6;
+        }
+
+        .campo input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #454256;
+            background-color: #252432;
+            color: #d5d2e1;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .nota {
+            color: #aaa6bd;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-top: 20px;
+        }
+
+        /* Diseño para celulares */
+        @media (max-width: 750px) {
+            .contenedor {
+                flex-direction: column;
+            }
+
+            .menu {
+                width: 100%;
+            }
+
+            .menu .acciones {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 3px;
+            }
+
+            .generos {
+                display: none;
+            }
+
+            .contenido {
+                padding: 20px 15px;
+            }
+
+            .barra-superior h1 {
+                font-size: 23px;
+            }
+
+            .buscador {
+                width: 100%;
+            }
+
+            .cabecera-perfil {
+                padding: 0 18px;
+                gap: 12px;
+            }
+
+            .foto-perfil {
+                width: 80px;
+                height: 80px;
+            }
+
+            .nombre h2 {
+                font-size: 19px;
+            }
+
+            .informacion {
+                padding: 22px 18px;
+            }
+
+            .formulario {
+                grid-template-columns: 1fr;
+            }
+
+            .campo.completo {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <!-- Menú de LIBRARY -->
+    <aside class="menu">
+
+        <div class="logo">LIBRARY</div>
+
+        <div class="acciones">
+            <a href="pagina.html">🏠 Inicio</a>
+            <a href="explorar.html">📚 Explorar libros</a>
+            <a href="prestamos.html">📖 Mis préstamos</a>
+            <a href="reservar.html">🔖 Reservar libro</a>
+            <a href="alertas.html">🔔 Alertas</a>
+            <a href="qr.html">▣ Mi código QR</a>
+            <a href="perfil.html" class="activo">👤 Mi perfil</a>
+        </div>
+
+        <div class="generos">
+            <h3>GÉNEROS</h3>
+            <a href="ficcion.html">Ficción</a>
+            <a href="novela.html">Novela</a>
+            <a href="cienciaficcion.html">Ciencia ficción</a>
+            <a href="fantasia.html">Fantasía</a>
+            <a href="noficcion.html">No ficción</a>
+            <a href="misterio.html">Misterio</a>
+            <a href="thriller.html">Thriller</a>
+            <a href="juvenil.html">Juvenil</a>
+            <a href="romance.html">Romance</a>
+            <a href="terror.html">Terror</a>
+            <a href="aventura.html">Aventura</a>
+            <a href="historia.html">Historia</a>
+            <a href="todos.html">Todos los libros</a>
+            <a href="https://www.google.com/maps" target="_blank">📍 Maps</a>
+        </div>
+
+    </aside>
+
+    <!-- Información del perfil -->
+    <main class="contenido">
+
+        <div class="barra-superior">
+            <h1>Mi perfil</h1>
+
+            <input
+                class="buscador"
+                type="search"
+                placeholder="🔍 Buscar un libro..."
+                aria-label="Buscar un libro"
+                onkeydown="if(event.key === 'Enter') window.location.href='explorar.html'">
+        </div>
+
+        <p class="descripcion">
+            Consulta tu información de estudiante y tu perfil
+            dentro de la biblioteca LIBRARY.
+        </p>
+
+        <section class="tarjeta">
+
+            <div class="portada"></div>
+
+            <div class="cabecera-perfil">
+
+                <img
+                    class="foto-perfil"
+                    src="https://i.pravatar.cc/100?img=47"
+                    alt="Foto de perfil de ejemplo">
+
+                <div class="nombre">
+                    <h2>Jessica Chastain</h2>
+                    <p>Estudiante de bachillerato</p>
+                    <span class="estado">● Matrícula activa</span>
+                </div>
+
+            </div>
+
+            <div class="informacion">
+
+                <h3 class="titulo-seccion">
+                    Información de la estudiante
+                </h3>
+
+                <div class="formulario">
+
+                    <div class="campo">
+                        <label>Nombre completo</label>
+                        <input type="text" value="Jessica Chastain" readonly>
+                    </div>
+
+                    <div class="campo">
+                        <label>Tipo de documento</label>
+                        <input type="text" value="Tarjeta de identidad (T.I.)" readonly>
+                    </div>
+
+                    <div class="campo">
+                        <label>Número de tarjeta de identidad (ficticio)</label>
+                        <input
+                            type="text"
+                            value="1023456789"
+                            inputmode="numeric"
+                            readonly>
+                    </div>
+
+                    <div class="campo">
+                        <label>Grupo</label>
+                        <input type="text" value="10°3" readonly>
+                    </div>
+
+                    <div class="campo completo">
+                        <label>Institución</label>
+                        <input
+                            type="text"
+                            value="Institución Educativa Javiera Londoño"
+                            readonly>
+                    </div>
+
+                    <div class="campo">
+                        <label>Grado</label>
+                        <input type="text" value="Décimo" readonly>
+                    </div>
+
+                    <div class="campo">
+                        <label>Estado académico</label>
+                        <input type="text" value="Estudiante activa" readonly>
+                    </div>
+
+                    <div class="campo">
+                        <label>Código de usuario LIBRARY</label>
+                        <input type="text" value="LIB-2026-001" readonly>
+                    </div>
+
+                    <div class="campo">
+                        <label>Jornada</label>
+                        <input type="text" value="Por asignar" readonly>
+                    </div>
+
+                </div>
+
+                <p class="nota">
+                    Los datos presentados son de ejemplo. El número de
+                    identificación es ficticio y no corresponde a un
+                    documento real.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
