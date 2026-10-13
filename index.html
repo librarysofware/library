@@ -8,7 +8,6 @@
     <title>Login</title>
 
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -115,7 +114,6 @@
             font-weight: bold;
             text-decoration: none;
         }
-
     </style>
 
 </head>
@@ -126,10 +124,7 @@
 
         <div class="imagen">
 
-            <img 
-                src="https://i.pinimg.com/1200x/6f/40/7d/6f407d86090cd2857036ac6f1b4941c2.jpg" 
-                alt="Paisaje"
-            >
+            <img src="https://i.pinimg.com/1200x/6f/40/7d/6f407d86090cd2857036ac6f1b4941c2.jpg" alt="Paisaje">
 
         </div>
 
@@ -137,31 +132,28 @@
         <div class="login">
 
             <h1>Login</h1>
+            <form action="pagina.html?vscode-livepreview=true" method="GET">
+                
+                <input type="email" placeholder="Email">
 
-            <input 
-                type="email" 
-                placeholder="Email"
-            >
+                <div class="password">
 
-            <div class="password">
+                    <input type="password" placeholder="Password">
 
-                <input 
-                    type="password" 
-                    placeholder="Password"
-                >
+                    <a href="#" class="forgot">
+                        Forgot password?
+                    </a>
 
-                <a href="#" class="forgot">
-                    Forgot password?
-                </a>
-
-            </div>
+                </div>
+                <!-- BOTÓN QUE LLEVA A PRINCIPAL.HTML -->
+    
+                <button ">
+                    Login
+                </button>
+            </form>
 
 
-            <!-- BOTÓN QUE LLEVA A PRINCIPAL.HTML -->
 
-            <button onclick="window.location.href='pagina.html?vscode-livepreview=true'">
-                Login
-            </button>
 
 
             <p>
